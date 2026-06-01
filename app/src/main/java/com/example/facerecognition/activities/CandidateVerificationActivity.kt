@@ -47,7 +47,7 @@ class CandidateVerificationActivity : AppCompatActivity() {
                 startActivity(
                     Intent(
                         this,
-                        VerificationResultActivity::class.java
+                        LivenessCheckActivity::class.java
                     )
                 )
             }
