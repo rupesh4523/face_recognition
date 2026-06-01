@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#90EE90"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Register Candidate"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Candidate Name"
+            android:layout_marginTop="20dp"/>
+
+        <EditText
+            android:id="@+id/etApplicationNo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Application Number"
+            android:layout_marginTop="12dp"/>
+
+        <EditText
+            android:id="@+id/etDepartment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Department"
+            android:layout_marginTop="12dp"/>
+
+        <EditText
+            android:id="@+id/etExamName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Exam Name"
+            android:layout_marginTop="12dp"/>
+
+        <Button
+            android:id="@+id/btnCaptureFace"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Capture Face"
+            android:layout_marginTop="24dp"/>
+
+        <Button
+            android:id="@+id/btnSaveCandidate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save Candidate"
+            android:layout_marginTop="12dp"/>
+
+    </LinearLayout>
+
+</ScrollView>
