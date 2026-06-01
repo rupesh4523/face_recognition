@@ -3,8 +3,11 @@ package com.example.facerecognition.activities
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.facerecognition.R
+import com.example.facerecognition.database.AdminRepository
 
 class LoginActivity : AppCompatActivity() {
 
@@ -12,17 +15,56 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val loginButton = findViewById<Button>(R.id.btnLogin)
+        val etUsername = findViewById<EditText>(R.id.etUsername)
+        val etPassword = findViewById<EditText>(R.id.etPassword)
+        val btnLogin = findViewById<Button>(R.id.btnLogin)
 
-        loginButton.setOnClickListener {
+        val adminRepository = AdminRepository(this)
 
-            startActivity(
-                Intent(
+        btnLogin.setOnClickListener {
+
+            val username = etUsername.text.toString().trim()
+            val password = etPassword.text.toString().trim()
+
+            if (username.isEmpty() || password.isEmpty()) {
+
+                Toast.makeText(
                     this,
-                    CandidateVerificationActivity::class.java
-                )
-            )
+                    "Please enter username and password",
+                    Toast.LENGTH_SHORT
+                ).show()
 
+                return@setOnClickListener
+            }
+
+            val isValid =
+                adminRepository.login(username, password)
+
+            if (isValid) {
+
+                Toast.makeText(
+                    this,
+                    "Login Successful",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+                startActivity(
+                    Intent(
+                        this,
+                        CandidateVerificationActivity::class.java
+                    )
+                )
+
+                finish()
+
+            } else {
+
+                Toast.makeText(
+                    this,
+                    "Invalid Username or Password",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 }

@@ -20,12 +20,11 @@
         android:textSize="18sp"
         android:layout_marginTop="20dp"/>
 
-    <FrameLayout
-        android:id="@+id/cameraPreview"
+    <androidx.camera.view.PreviewView
+        android:id="@+id/previewView"
         android:layout_width="300dp"
         android:layout_height="350dp"
-        android:layout_marginTop="20dp"
-        android:background="#DDDDDD"/>
+        android:layout_marginTop="20dp"/>
 
     <TextView
         android:id="@+id/txtStatus"
@@ -34,12 +33,5 @@
         android:text="Status : Waiting..."
         android:textSize="18sp"
         android:layout_marginTop="20dp"/>
-
-    <Button
-        android:id="@+id/btnStartLiveness"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Start Liveness Check"
-        android:layout_marginTop="25dp"/>
 
 </LinearLayout>

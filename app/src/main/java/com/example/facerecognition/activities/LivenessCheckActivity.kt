@@ -1,35 +1,237 @@
 package com.example.facerecognition.activities
 
-import android.content.Intent
-import android.os.Bundle
-import android.widget.Button
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import com.example.facerecognition.R
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Bundle
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.ImageProxy
+import androidx.camera.core.Preview
+import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.camera.view.PreviewView
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import com.example.facerecognition.R
+import com.example.facerecognition.ml.FaceDetectorHelper
+import com.google.mlkit.vision.common.InputImage
+
+import androidx.camera.core.ExperimentalGetImage
+
+@ExperimentalGetImage
 class LivenessCheckActivity : AppCompatActivity() {
+
+    private lateinit var previewView: PreviewView
+    private lateinit var txtStatus: TextView
+
+    private val faceDetector = FaceDetectorHelper()
+
+    private var eyesClosedDetected = false
+    private var livenessPassed = false
+
+    companion object {
+        private const val CAMERA_PERMISSION_CODE = 100
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_liveness_check)
 
-        val startButton =
-            findViewById<Button>(R.id.btnStartLiveness)
+        previewView = findViewById(R.id.previewView)
+        txtStatus = findViewById(R.id.txtStatus)
 
-        startButton.setOnClickListener {
-
-            Toast.makeText(
+        if (allPermissionsGranted()) {
+            startCamera()
+        } else {
+            ActivityCompat.requestPermissions(
                 this,
-                "Liveness Detection Successful",
-                Toast.LENGTH_SHORT
-            ).show()
-
-            startActivity(
-                Intent(
-                    this,
-                    VerificationResultActivity::class.java
-                )
+                arrayOf(Manifest.permission.CAMERA),
+                CAMERA_PERMISSION_CODE
             )
+        }
+    }
+
+    private fun allPermissionsGranted(): Boolean {
+        return ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.CAMERA
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(
+            requestCode,
+            permissions,
+            grantResults
+        )
+
+        if (requestCode == CAMERA_PERMISSION_CODE) {
+            if (
+                grantResults.isNotEmpty() &&
+                grantResults[0] == PackageManager.PERMISSION_GRANTED
+            ) {
+                startCamera()
+            }
+        }
+    }
+
+    private fun startCamera() {
+
+        val cameraProviderFuture =
+            ProcessCameraProvider.getInstance(this)
+
+        cameraProviderFuture.addListener({
+
+            val cameraProvider =
+                cameraProviderFuture.get()
+
+            val preview =
+                Preview.Builder().build()
+
+            preview.surfaceProvider =
+                previewView.surfaceProvider
+
+            val imageAnalysis =
+                ImageAnalysis.Builder()
+                    .setBackpressureStrategy(
+                        ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST
+                    )
+                    .build()
+
+            imageAnalysis.setAnalyzer(
+                ContextCompat.getMainExecutor(this)
+            ) { imageProxy ->
+
+                processImage(imageProxy)
+
+            }
+
+            val cameraSelector =
+                CameraSelector.DEFAULT_FRONT_CAMERA
+
+            try {
+
+                cameraProvider.unbindAll()
+
+                cameraProvider.bindToLifecycle(
+                    this,
+                    cameraSelector,
+                    preview,
+                    imageAnalysis
+                )
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+
+        }, ContextCompat.getMainExecutor(this))
+    }
+
+    @ExperimentalGetImage
+    private fun processImage(
+        imageProxy: ImageProxy
+    ) {
+
+        val mediaImage = imageProxy.image
+
+        if (mediaImage != null) {
+
+            val image =
+                InputImage.fromMediaImage(
+                    mediaImage,
+                    imageProxy.imageInfo.rotationDegrees
+                )
+
+            faceDetector.detector
+                .process(image)
+                .addOnSuccessListener { faces ->
+
+                    if (faces.isNotEmpty()) {
+
+                        val face = faces[0]
+
+                        val leftEye =
+                            face.leftEyeOpenProbability ?: 1f
+
+                        val rightEye =
+                            face.rightEyeOpenProbability ?: 1f
+
+                        if (!livenessPassed) {
+
+                            if (
+                                !eyesClosedDetected &&
+                                leftEye < 0.4f &&
+                                rightEye < 0.4f
+                            ) {
+
+                                eyesClosedDetected = true
+
+                                txtStatus.text =
+                                    "Status : Eyes Closed Detected"
+
+                            }
+
+                            else if (
+                                eyesClosedDetected &&
+                                leftEye > 0.8f &&
+                                rightEye > 0.8f
+                            ) {
+
+                                livenessPassed = true
+
+                                txtStatus.text =
+                                    "Status : Liveness Passed"
+
+                            }
+
+                            else {
+
+                                txtStatus.text =
+                                    "Status : Blink To Verify"
+                            }
+                        }
+
+                        else {
+
+                            txtStatus.text =
+                                "Status : Liveness Passed"
+                        }
+
+                    }
+
+                    else {
+
+                        txtStatus.text =
+                            "Status : No Face Detected"
+                    }
+
+                }
+
+                .addOnFailureListener {
+
+                    txtStatus.text =
+                        "Status : Detection Error"
+
+                }
+
+                .addOnCompleteListener {
+
+                    imageProxy.close()
+
+                }
+
+        }
+
+        else {
+
+            imageProxy.close()
+
         }
     }
 }
