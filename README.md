@@ -226,6 +226,3 @@ The primary objective of this project is to provide a secure, offline, and effic
 * Google ML Kit Face Detection
 
 ---
-
-**Academic Project – Examination Candidate Verification System**
-**MIT Academy of Engineering, Pune**
