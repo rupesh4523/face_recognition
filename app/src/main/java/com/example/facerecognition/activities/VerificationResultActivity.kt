@@ -1,10 +1,15 @@
 package com.example.facerecognition.activities
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.facerecognition.R
+import com.example.facerecognition.database.CandidateRepository
+import java.io.File
 
 class VerificationResultActivity : AppCompatActivity() {
 
@@ -12,16 +17,72 @@ class VerificationResultActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_verification_result)
 
-        val backButton = findViewById<Button>(R.id.btnBackDashboard)
+        val candidateId =
+            intent.getIntExtra(
+                "CANDIDATE_ID",
+                -1
+            )
 
-        backButton.setOnClickListener {
+        val repository =
+            CandidateRepository(this)
 
-            startActivity(
+        val candidate =
+            repository.getCandidateById(candidateId)
+
+        val imgCandidate =
+            findViewById<ImageView>(R.id.imgCandidate)
+
+        val txtCandidateName =
+            findViewById<TextView>(R.id.txtCandidateName)
+
+        val txtApplicationNo =
+            findViewById<TextView>(R.id.txtApplicationNo)
+
+        val txtDepartment =
+            findViewById<TextView>(R.id.txtDepartment)
+
+        val txtStatus =
+            findViewById<TextView>(R.id.txtStatus)
+
+        val btnBackDashboard =
+            findViewById<Button>(R.id.btnBackDashboard)
+
+        if (candidate != null) {
+
+            txtCandidateName.text =
+                "Name : ${candidate.name}"
+
+            txtApplicationNo.text =
+                "Application No : ${candidate.applicationNo}"
+
+            txtDepartment.text =
+                "Department : ${candidate.department}"
+
+            txtStatus.text =
+                "LIVENESS VERIFIED ✓"
+
+            if (candidate.imagePath.isNotEmpty()) {
+
+                imgCandidate.setImageURI(
+                    Uri.fromFile(
+                        File(candidate.imagePath)
+                    )
+                )
+            }
+        }
+
+        btnBackDashboard.setOnClickListener {
+
+            val intent =
                 Intent(
                     this,
                     CandidateVerificationActivity::class.java
                 )
-            )
+
+            intent.flags =
+                Intent.FLAG_ACTIVITY_CLEAR_TOP
+
+            startActivity(intent)
 
             finish()
         }

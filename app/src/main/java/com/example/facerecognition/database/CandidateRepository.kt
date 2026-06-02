@@ -165,4 +165,49 @@ class CandidateRepository(context: Context) {
 
         return result > 0
     }
+    fun getCandidateByApplicationNo(
+        applicationNo: String
+    ): Candidate? {
+
+        val db = dbHelper.readableDatabase
+
+        val cursor = db.rawQuery(
+            "SELECT * FROM Candidate WHERE application_no=?",
+            arrayOf(applicationNo)
+        )
+
+        var candidate: Candidate? = null
+
+        if (cursor.moveToFirst()) {
+
+            candidate = Candidate(
+                candidateId = cursor.getInt(
+                    cursor.getColumnIndexOrThrow("candidate_id")
+                ),
+                name = cursor.getString(
+                    cursor.getColumnIndexOrThrow("name")
+                ),
+                applicationNo = cursor.getString(
+                    cursor.getColumnIndexOrThrow("application_no")
+                ),
+                department = cursor.getString(
+                    cursor.getColumnIndexOrThrow("department")
+                ),
+                examName = cursor.getString(
+                    cursor.getColumnIndexOrThrow("exam_name")
+                ),
+                imagePath = cursor.getString(
+                    cursor.getColumnIndexOrThrow("image_path")
+                ),
+                faceEmbedding = cursor.getString(
+                    cursor.getColumnIndexOrThrow("face_embedding")
+                )
+            )
+        }
+
+        cursor.close()
+        db.close()
+
+        return candidate
+    }
 }

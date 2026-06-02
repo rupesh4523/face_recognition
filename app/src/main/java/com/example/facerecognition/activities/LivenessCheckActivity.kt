@@ -1,6 +1,6 @@
 package com.example.facerecognition.activities
 
-
+import android.content.Intent
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -17,7 +17,7 @@ import androidx.core.content.ContextCompat
 import com.example.facerecognition.R
 import com.example.facerecognition.ml.FaceDetectorHelper
 import com.google.mlkit.vision.common.InputImage
-
+import android.widget.Toast
 import androidx.camera.core.ExperimentalGetImage
 
 @ExperimentalGetImage
@@ -27,6 +27,9 @@ class LivenessCheckActivity : AppCompatActivity() {
     private lateinit var txtStatus: TextView
 
     private val faceDetector = FaceDetectorHelper()
+    private var candidateId = -1
+    private var candidateName = ""
+    private var imagePath = ""
 
     private var eyesClosedDetected = false
     private var livenessPassed = false
@@ -38,6 +41,26 @@ class LivenessCheckActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_liveness_check)
+        candidateId =
+            intent.getIntExtra(
+                "CANDIDATE_ID",
+                -1
+            )
+
+        candidateName =
+            intent.getStringExtra(
+                "CANDIDATE_NAME"
+            ) ?: ""
+
+        imagePath =
+            intent.getStringExtra(
+                "IMAGE_PATH"
+            ) ?: ""
+        Toast.makeText(
+            this,
+            "Candidate: $candidateName",
+            Toast.LENGTH_SHORT
+        ).show()
 
         previewView = findViewById(R.id.previewView)
         txtStatus = findViewById(R.id.txtStatus)
@@ -188,6 +211,36 @@ class LivenessCheckActivity : AppCompatActivity() {
                                 txtStatus.text =
                                     "Status : Liveness Passed"
 
+                                Toast.makeText(
+                                    this,
+                                    "Liveness Verification Successful",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+
+                                val intent =
+                                    android.content.Intent(
+                                        this,
+                                        VerificationResultActivity::class.java
+                                    )
+
+                                intent.putExtra(
+                                    "CANDIDATE_ID",
+                                    candidateId
+                                )
+
+                                intent.putExtra(
+                                    "CANDIDATE_NAME",
+                                    candidateName
+                                )
+
+                                intent.putExtra(
+                                    "IMAGE_PATH",
+                                    imagePath
+                                )
+
+                                startActivity(intent)
+
+                                finish()
                             }
 
                             else {
