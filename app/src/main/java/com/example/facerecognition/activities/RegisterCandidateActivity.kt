@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.facerecognition.R
 import com.example.facerecognition.database.CandidateRepository
 import com.example.facerecognition.models.Candidate
+import android.content.Intent
 
 class RegisterCandidateActivity : AppCompatActivity() {
 
@@ -26,11 +27,13 @@ class RegisterCandidateActivity : AppCompatActivity() {
         val candidateRepository = CandidateRepository(this)
 
         captureButton.setOnClickListener {
-            Toast.makeText(
-                this,
-                "Camera will be connected later",
-                Toast.LENGTH_SHORT
-            ).show()
+
+            startActivity(
+                Intent(
+                    this,
+                    FaceCaptureActivity::class.java
+                )
+            )
         }
 
         saveButton.setOnClickListener {
