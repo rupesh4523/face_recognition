@@ -4,12 +4,14 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="20dp">
+    android:padding="20dp"
+    android:background="@color/backgroundColor">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Capture Candidate Face"
+        android:textColor="@color/textPrimary"
         android:textSize="24sp"
         android:textStyle="bold"/>
 
@@ -17,13 +19,15 @@
         android:id="@+id/previewView"
         android:layout_width="300dp"
         android:layout_height="400dp"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:textColor="@color/textPrimary"/>
 
     <Button
         android:id="@+id/btnTakePhoto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Take Photo"
+        android:textColor="@color/textPrimary"
         android:layout_marginTop="20dp"/>
 
 </LinearLayout>

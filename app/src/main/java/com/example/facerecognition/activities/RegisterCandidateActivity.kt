@@ -23,6 +23,39 @@ class RegisterCandidateActivity : AppCompatActivity() {
 
         val captureButton = findViewById<Button>(R.id.btnCaptureFace)
         val saveButton = findViewById<Button>(R.id.btnSaveCandidate)
+        etName.setOnEditorActionListener { _, _, _ ->
+
+            etApplicationNo.requestFocus()
+
+            true
+        }
+
+        etApplicationNo.setOnEditorActionListener { _, _, _ ->
+
+            etDepartment.requestFocus()
+
+            true
+        }
+
+        etDepartment.setOnEditorActionListener { _, _, _ ->
+
+            etExamName.requestFocus()
+
+            true
+        }
+
+        etExamName.setOnEditorActionListener { _, _, _ ->
+
+            captureButton.requestFocus()
+
+            true
+        }
+        etExamName.setOnEditorActionListener { _, _, _ ->
+
+            saveButton.requestFocus()
+
+            true
+        }
 
         val candidateRepository = CandidateRepository(this)
 

@@ -20,6 +20,20 @@ class LoginActivity : AppCompatActivity() {
         val btnLogin = findViewById<Button>(R.id.btnLogin)
 
         val adminRepository = AdminRepository(this)
+        etUsername.setOnEditorActionListener { _, _, _ ->
+
+            etPassword.requestFocus()
+
+            true
+        }
+
+        etPassword.setOnEditorActionListener { _, _, _ ->
+
+            btnLogin.performClick()
+
+            true
+        }
+
 
         btnLogin.setOnClickListener {
 

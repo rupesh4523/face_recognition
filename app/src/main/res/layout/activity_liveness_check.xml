@@ -4,12 +4,14 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="24dp">
+    android:padding="24dp"
+    android:background="@color/backgroundColor">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Liveness Detection"
+        android:textColor="@color/textPrimary"
         android:textSize="28sp"
         android:textStyle="bold" />
 
@@ -17,6 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Please Blink Your Eyes"
+        android:textColor="@color/textPrimary"
         android:textSize="18sp"
         android:layout_marginTop="20dp"/>
 
@@ -24,13 +27,15 @@
         android:id="@+id/previewView"
         android:layout_width="300dp"
         android:layout_height="350dp"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:textColor="@color/textPrimary"/>
 
     <TextView
         android:id="@+id/txtStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Status : Waiting..."
+        android:textColor="@color/textPrimary"
         android:textSize="18sp"
         android:layout_marginTop="20dp"/>
 

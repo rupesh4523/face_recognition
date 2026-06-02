@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/backgroundColor">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="24dp"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:textColor="@color/textPrimary">
 
         <ImageView
             android:layout_width="120dp"
@@ -19,6 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Admin Profile"
+            android:textColor="@color/textPrimary"
             android:textSize="28sp"
             android:textStyle="bold"
             android:layout_marginTop="16dp"/>
@@ -27,6 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Username : Admin"
+            android:textColor="@color/textPrimary"
             android:textSize="18sp"
             android:layout_marginTop="24dp"/>
 
@@ -34,6 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Role : Examination Officer"
+            android:textColor="@color/textPrimary"
             android:textSize="18sp"
             android:layout_marginTop="12dp"/>
 
@@ -41,6 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Version : 1.0"
+            android:textColor="@color/textPrimary"
             android:textSize="18sp"
             android:layout_marginTop="12dp"/>
 
@@ -49,6 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Edit Profile"
+            android:textColor="@color/textPrimary"
             android:layout_marginTop="30dp"/>
 
         <Button
@@ -56,6 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Logout"
+            android:textColor="@color/textPrimary"
             android:layout_marginTop="12dp"/>
 
     </LinearLayout>

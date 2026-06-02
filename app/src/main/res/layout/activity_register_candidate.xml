@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/surfaceColor">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,6 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Register Candidate"
+            android:textColor="@color/textPrimary"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -21,28 +23,40 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Candidate Name"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="20dp"
+            android:inputType="text"
+            android:singleLine="true"
+            android:imeOptions="actionNext"/>
 
         <EditText
             android:id="@+id/etApplicationNo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Application Number"
-            android:layout_marginTop="12dp"/>
+            android:layout_marginTop="12dp"
+            android:inputType="text"
+            android:singleLine="true"
+            android:imeOptions="actionNext"/>
 
         <EditText
             android:id="@+id/etDepartment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Department"
-            android:layout_marginTop="12dp"/>
+            android:layout_marginTop="12dp"
+            android:inputType="text"
+            android:singleLine="true"
+            android:imeOptions="actionNext"/>
 
         <EditText
             android:id="@+id/etExamName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Exam Name"
-            android:layout_marginTop="12dp"/>
+            android:layout_marginTop="12dp"
+            android:inputType="text"
+            android:singleLine="true"
+            android:imeOptions="actionDone"/>
 
         <ImageView
             android:id="@+id/imgCandidateFace"

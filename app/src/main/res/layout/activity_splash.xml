@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.SplashActivity">
+    tools:context=".activities.SplashActivity"
+    android:background="@color/backgroundColor">
 
     <ImageView
         android:id="@+id/logoImage"
@@ -22,9 +23,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Examination Candidate Verification"
+        android:textColor="@color/textPrimary"
         android:textSize="22sp"
         android:textStyle="bold"
-        android:textColor="#000000"
         app:layout_constraintTop_toBottomOf="@id/logoImage"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
