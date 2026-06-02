@@ -1,28 +1,76 @@
 package com.example.facerecognition.activities
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.facerecognition.R
 import com.example.facerecognition.database.CandidateRepository
 import com.example.facerecognition.models.Candidate
-import android.content.Intent
+import java.io.File
 
 class RegisterCandidateActivity : AppCompatActivity() {
+
+    private lateinit var imgCandidateFace: ImageView
+
+    private var capturedImagePath = ""
+
+    private val faceCaptureLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+
+            if (result.resultCode == RESULT_OK) {
+
+                capturedImagePath =
+                    result.data?.getStringExtra("IMAGE_PATH") ?: ""
+
+                if (capturedImagePath.isNotEmpty()) {
+
+                    imgCandidateFace.setImageURI(
+                        Uri.fromFile(
+                            File(capturedImagePath)
+                        )
+                    )
+                }
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register_candidate)
 
-        val etName = findViewById<EditText>(R.id.etName)
-        val etApplicationNo = findViewById<EditText>(R.id.etApplicationNo)
-        val etDepartment = findViewById<EditText>(R.id.etDepartment)
-        val etExamName = findViewById<EditText>(R.id.etExamName)
+        val etName =
+            findViewById<EditText>(R.id.etName)
 
-        val captureButton = findViewById<Button>(R.id.btnCaptureFace)
-        val saveButton = findViewById<Button>(R.id.btnSaveCandidate)
+        val etApplicationNo =
+            findViewById<EditText>(R.id.etApplicationNo)
+
+        val etDepartment =
+            findViewById<EditText>(R.id.etDepartment)
+
+        val etExamName =
+            findViewById<EditText>(R.id.etExamName)
+
+        val captureButton =
+            findViewById<Button>(R.id.btnCaptureFace)
+
+        val saveButton =
+            findViewById<Button>(R.id.btnSaveCandidate)
+
+        imgCandidateFace =
+            findViewById(R.id.imgCandidateFace)
+
+        val candidateRepository =
+            CandidateRepository(this)
+
+        // Keyboard Navigation
+
         etName.setOnEditorActionListener { _, _, _ ->
 
             etApplicationNo.requestFocus()
@@ -46,37 +94,42 @@ class RegisterCandidateActivity : AppCompatActivity() {
 
         etExamName.setOnEditorActionListener { _, _, _ ->
 
-            captureButton.requestFocus()
-
-            true
-        }
-        etExamName.setOnEditorActionListener { _, _, _ ->
-
             saveButton.requestFocus()
 
             true
         }
 
-        val candidateRepository = CandidateRepository(this)
+        // Capture Face
 
         captureButton.setOnClickListener {
 
-            startActivity(
+            val intent =
                 Intent(
                     this,
                     FaceCaptureActivity::class.java
                 )
-            )
+
+            faceCaptureLauncher.launch(intent)
         }
+
+        // Save Candidate
 
         saveButton.setOnClickListener {
 
-            val name = etName.text.toString().trim()
-            val applicationNo = etApplicationNo.text.toString().trim()
-            val department = etDepartment.text.toString().trim()
-            val examName = etExamName.text.toString().trim()
+            val name =
+                etName.text.toString().trim()
 
-            if (name.isEmpty() ||
+            val applicationNo =
+                etApplicationNo.text.toString().trim()
+
+            val department =
+                etDepartment.text.toString().trim()
+
+            val examName =
+                etExamName.text.toString().trim()
+
+            if (
+                name.isEmpty() ||
                 applicationNo.isEmpty() ||
                 department.isEmpty() ||
                 examName.isEmpty()
@@ -96,12 +149,14 @@ class RegisterCandidateActivity : AppCompatActivity() {
                 applicationNo = applicationNo,
                 department = department,
                 examName = examName,
-                imagePath = "",
+                imagePath = capturedImagePath,
                 faceEmbedding = ""
             )
 
             val isInserted =
-                candidateRepository.insertCandidate(candidate)
+                candidateRepository.insertCandidate(
+                    candidate
+                )
 
             if (isInserted) {
 
@@ -115,6 +170,10 @@ class RegisterCandidateActivity : AppCompatActivity() {
                 etApplicationNo.text.clear()
                 etDepartment.text.clear()
                 etExamName.text.clear()
+
+                imgCandidateFace.setImageDrawable(null)
+
+                capturedImagePath = ""
 
             } else {
 

@@ -43,6 +43,10 @@
             android:exported="false"/>
 
         <activity
+            android:name=".activities.CandidateProfileActivity"
+            android:exported="false"/>
+
+        <activity
             android:name=".activities.VerificationResultActivity"
             android:exported="false"/>
 

@@ -1,10 +1,13 @@
 package com.example.facerecognition.activities
 
 import android.os.Bundle
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.facerecognition.R
+import com.example.facerecognition.adapters.CandidateAdapter
 import com.example.facerecognition.database.CandidateRepository
+import android.content.Intent
 
 class CandidateListActivity : AppCompatActivity() {
 
@@ -12,33 +15,35 @@ class CandidateListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_candidate_list)
 
-        val txtCandidates =
-            findViewById<TextView>(R.id.txtCandidates)
+        val recyclerCandidates =
+            findViewById<RecyclerView>(
+                R.id.recyclerCandidates
+            )
 
         val repository =
             CandidateRepository(this)
 
-        val candidates =
+        val candidateList =
             repository.getAllCandidates()
 
-        val builder = StringBuilder()
+        recyclerCandidates.layoutManager =
+            LinearLayoutManager(this)
 
-        for (candidate in candidates) {
+        recyclerCandidates.adapter =
+            CandidateAdapter(candidateList) { candidate ->
 
-            builder.append(
-                """
-                Name: ${candidate.name}
-                Application No: ${candidate.applicationNo}
-                Department: ${candidate.department}
-                
-                -----------------------
-                
-                """.trimIndent()
-            )
+                val intent =
+                    Intent(
+                        this,
+                        CandidateProfileActivity::class.java
+                    )
 
-            builder.append("\n\n")
-        }
+                intent.putExtra(
+                    "CANDIDATE_ID",
+                    candidate.candidateId
+                )
 
-        txtCandidates.text = builder.toString()
+                startActivity(intent)
+            }
     }
 }
