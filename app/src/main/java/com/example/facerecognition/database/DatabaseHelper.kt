@@ -58,8 +58,6 @@ class DatabaseHelper(context: Context) :
             """
             INSERT INTO Admin(username,password)
             VALUES('admin','admin123')
-            INSERT INTO Admin(username,password)
-            VALUES('rupesh','rupesh123')
             """
         )
     }
