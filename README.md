@@ -1,61 +1,88 @@
 # Examination Candidate Verification System
 
-## Project Overview
+## Overview
 
-The Examination Candidate Verification System is an Android application developed to verify the identity of examination candidates using face detection and liveness detection.
+The Examination Candidate Verification System is an Android-based offline identity verification solution designed for examination environments. The application uses facial verification, liveness detection, and local database storage to authenticate candidates before examinations.
 
-The application works completely in offline mode using SQLite as the local database. It helps examination authorities prevent impersonation and unauthorized access during examinations.
+The project is being developed as a hackathon solution and is designed to function completely offline without requiring internet connectivity.
 
 ---
 
-## Features
+## Current Project Status
+
+### Completion Status
+
+Approximately 70% Complete
+
+### Current Build Status
+
+* Application builds successfully
+* SQLite integration completed
+* Camera integration completed
+* Face detection working
+* Blink-based liveness detection working
+* Light/Dark mode support implemented
+
+---
+
+## Features Implemented
 
 ### Admin Authentication
 
-* Secure admin login
-* Access restricted to authorized personnel
+* Admin Login Screen
+* Username and Password Validation
+* SQLite-based Authentication
 
-### Candidate Registration
+### Candidate Management
 
-* Register candidate details
-* Store candidate information locally
-* Capture candidate facial data
+* Candidate Registration Screen
+* Candidate List Screen
+* Candidate Information Storage
+* SQLite Database Integration
 
-### Candidate Verification
+### Face Verification Components
 
-* Face detection using ML Kit
-* Camera integration using CameraX
-* Real-time candidate verification
+* CameraX Integration
+* Front Camera Preview
+* Real-Time Face Detection using Google ML Kit
+* Blink-Based Liveness Detection
+* Candidate Verification Workflow
 
-### Liveness Detection
+### User Interface
 
-* Blink-based liveness verification
-* Prevents spoofing using static photographs
-* Real-time eye tracking
+* Splash Screen
+* Login Screen
+* Candidate Verification Dashboard
+* Register Candidate Screen
+* Candidate List Screen
+* Face Capture Screen
+* Liveness Detection Screen
+* Verification Result Screen
 
-### Offline Database
+### Theme Support
 
-* SQLite database support
-* No internet connection required
-* Local storage of candidate information
+* Light Mode
+* Dark Mode
+* Automatic Theme Switching Based on Device Settings
 
-### Verification Results
+### Database
 
-* Verification status display
-* Candidate authentication results
-* Examination eligibility confirmation
+* SQLite Offline Storage
+* Candidate Repository
+* Admin Repository
+* Verification Repository
 
 ---
 
-## Technologies Used
+## Technology Stack
 
 ### Frontend
 
 * Kotlin
 * XML Layouts
-* Android SDK
+* Material Design 3
 
-### Database
+### Backend
 
 * SQLite
 
@@ -63,7 +90,7 @@ The application works completely in offline mode using SQLite as the local datab
 
 * Google ML Kit Face Detection
 
-### Camera
+### Camera Framework
 
 * CameraX
 
@@ -81,9 +108,10 @@ com.example.facerecognition
 ├── activities
 │   ├── SplashActivity
 │   ├── LoginActivity
+│   ├── CandidateVerificationActivity
 │   ├── RegisterCandidateActivity
 │   ├── CandidateListActivity
-│   ├── CandidateVerificationActivity
+│   ├── FaceCaptureActivity
 │   ├── LivenessCheckActivity
 │   ├── VerificationResultActivity
 │   └── ProfileActivity
@@ -100,7 +128,6 @@ com.example.facerecognition
 │   └── VerificationLog.kt
 │
 ├── ml
-│   ├── CameraHelper.kt
 │   └── FaceDetectorHelper.kt
 │
 ├── adapters
@@ -109,25 +136,23 @@ com.example.facerecognition
 
 ---
 
-## Application Workflow
+## Current Workflow
 
 ```text
 Splash Screen
-       ↓
+      ↓
 Admin Login
-       ↓
-Dashboard
-       ↓
+      ↓
+Verification Dashboard
+      ↓
 Candidate Registration
-       ↓
-Store Candidate Data
-       ↓
+      ↓
 Candidate Verification
-       ↓
+      ↓
 Face Detection
-       ↓
-Liveness Detection
-       ↓
+      ↓
+Blink-Based Liveness Detection
+      ↓
 Verification Result
 ```
 
@@ -136,11 +161,11 @@ Verification Result
 ## Liveness Detection Workflow
 
 ```text
-Open Camera
+Camera Preview
       ↓
-Detect Face
+Face Detection
       ↓
-Ask Candidate to Blink
+Blink To Verify
       ↓
 Eyes Closed Detected
       ↓
@@ -151,15 +176,69 @@ Liveness Passed
 
 ---
 
+## Features Under Development
+
+### Face Registration
+
+* Capture Candidate Face
+* Save Face Image Locally
+* Store Image Path in SQLite
+* Face Preview in Registration Screen
+
+### Face Recognition
+
+* FaceNet Integration
+* Face Embedding Generation
+* Embedding Storage in SQLite
+* Face Matching System
+* Similarity Score Calculation
+
+### Verification System
+
+* Candidate Face Comparison
+* Match / No Match Decision
+* Confidence Score
+
+### Verification Logs
+
+* Verification History
+* Timestamp Recording
+* Candidate Activity Logs
+
+---
+
+## Offline Architecture
+
+The application is designed to work completely offline.
+
+### Local Storage
+
+* SQLite Database
+* Candidate Information
+* Verification Logs
+* Face Metadata
+
+### Offline Processing
+
+* Face Detection
+* Liveness Detection
+* Candidate Verification
+* Data Management
+
+No internet connection is required during operation.
+
+---
+
 ## Future Enhancements
 
-* Face Recognition Matching
+* Face Recognition using FaceNet
 * Face Embedding Storage
+* Head Turn Detection
 * Advanced Anti-Spoofing
-* Candidate Attendance Tracking
-* Examination Monitoring Dashboard
-* Report Generation
-* Export Verification Logs
+* Confidence Score Analysis
+* Verification Reports
+* Examination Attendance Tracking
+* Analytics Dashboard
 
 ---
 
@@ -168,7 +247,7 @@ Liveness Passed
 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/examination-candidate-verification.git
+git clone <repository-url>
 ```
 
 2. Open the project in Android Studio
@@ -181,7 +260,7 @@ git clone https://github.com/your-username/examination-candidate-verification.gi
 
 ---
 
-## Permissions Required
+## Permissions
 
 ```xml
 <uses-permission android:name="android.permission.CAMERA"/>
@@ -189,31 +268,32 @@ git clone https://github.com/your-username/examination-candidate-verification.gi
 
 ---
 
-## Team Contributions
+## Team Responsibilities
 
-### Frontend Development
+### Frontend Team
 
-* User Interface Design
-* Navigation Flow
-* Activity Management
+* UI Development
+* Navigation
+* User Experience
 
-### Database Development
+### Database Team
 
-* SQLite Integration
-* Candidate Data Storage
+* SQLite Management
+* Data Persistence
 * Verification Logs
 
-### Machine Learning
+### AI Team
 
 * Face Detection
 * Liveness Detection
-* Camera Integration
+* Face Recognition
+* Candidate Verification
 
 ---
 
 ## Project Objective
 
-The primary objective of this project is to provide a secure, offline, and efficient candidate verification mechanism for examination environments using facial verification and liveness detection techniques.
+To build a secure, offline, AI-powered candidate verification system that prevents impersonation during examinations through facial verification and liveness detection.
 
 ---
 
@@ -223,6 +303,5 @@ The primary objective of this project is to provide a secure, offline, and effic
 * Kotlin
 * SQLite
 * CameraX
-* Google ML Kit Face Detection
-
----
+* Google ML Kit
+* Material Design 3
