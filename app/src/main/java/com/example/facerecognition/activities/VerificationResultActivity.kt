@@ -56,6 +56,11 @@ class VerificationResultActivity : AppCompatActivity() {
         val btnBackDashboard =
             findViewById<Button>(R.id.btnBackDashboard)
 
+        val btnRetakeVerification =
+            findViewById<Button>(
+                R.id.btnRetakeVerification
+            )
+
         if (candidate != null) {
 
             val matchResult =
@@ -63,6 +68,16 @@ class VerificationResultActivity : AppCompatActivity() {
                     "MATCH_RESULT",
                     false
                 )
+            if (matchResult) {
+
+                btnRetakeVerification.visibility =
+                    android.view.View.GONE
+
+            } else {
+
+                btnRetakeVerification.visibility =
+                    android.view.View.VISIBLE
+            }
             val confidence =
                 intent.getFloatExtra(
                     "CONFIDENCE",
@@ -146,6 +161,23 @@ class VerificationResultActivity : AppCompatActivity() {
 
             intent.flags =
                 Intent.FLAG_ACTIVITY_CLEAR_TOP
+
+            startActivity(intent)
+
+            finish()
+        }
+        btnRetakeVerification.setOnClickListener {
+
+            val intent =
+                Intent(
+                    this,
+                    LivenessCheckActivity::class.java
+                )
+
+            intent.putExtra(
+                "CANDIDATE_ID",
+                candidateId
+            )
 
             startActivity(intent)
 

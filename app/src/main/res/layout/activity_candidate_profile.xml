@@ -66,6 +66,13 @@
             android:visibility="gone" />
 
         <Button
+            android:id="@+id/btnUpdateFace"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Update Face" />
+
+        <Button
             android:id="@+id/btnDelete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -210,4 +210,26 @@ class CandidateRepository(context: Context) {
 
         return candidate
     }
+
+    fun getTotalCandidates(): Int {
+
+        val db =
+            dbHelper.readableDatabase
+
+        val cursor =
+            db.rawQuery(
+                "SELECT COUNT(*) FROM Candidate",
+                null
+            )
+
+        cursor.moveToFirst()
+
+        val count =
+            cursor.getInt(0)
+
+        cursor.close()
+        db.close()
+
+        return count
+    }
 }

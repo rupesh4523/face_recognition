@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:padding="40dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -19,10 +19,17 @@
             android:textSize="24sp"
             android:textStyle="bold" />
 
+        <EditText
+            android:id="@+id/etSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Search by Name or Application No"
+            android:layout_margin="10dp"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerCandidates"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:nestedScrollingEnabled="false"/>
 

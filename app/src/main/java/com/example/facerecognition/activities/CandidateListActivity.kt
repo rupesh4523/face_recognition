@@ -1,23 +1,32 @@
 package com.example.facerecognition.activities
 
+import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.facerecognition.R
 import com.example.facerecognition.adapters.CandidateAdapter
 import com.example.facerecognition.database.CandidateRepository
-import android.content.Intent
 
 class CandidateListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_candidate_list)
 
         val recyclerCandidates =
             findViewById<RecyclerView>(
                 R.id.recyclerCandidates
+            )
+
+        val etSearch =
+            findViewById<EditText>(
+                R.id.etSearch
             )
 
         val repository =
@@ -26,11 +35,16 @@ class CandidateListActivity : AppCompatActivity() {
         val candidateList =
             repository.getAllCandidates()
 
+        val originalList =
+            candidateList.toMutableList()
+
         recyclerCandidates.layoutManager =
             LinearLayoutManager(this)
 
-        recyclerCandidates.adapter =
-            CandidateAdapter(candidateList) { candidate ->
+        val adapter =
+            CandidateAdapter(
+                candidateList.toMutableList()
+            ) { candidate ->
 
                 val intent =
                     Intent(
@@ -45,5 +59,51 @@ class CandidateListActivity : AppCompatActivity() {
 
                 startActivity(intent)
             }
+
+        recyclerCandidates.adapter =
+            adapter
+
+        etSearch.addTextChangedListener(
+            object : TextWatcher {
+
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {}
+
+                override fun onTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    before: Int,
+                    count: Int
+                ) {
+
+                    val query =
+                        s.toString().lowercase()
+
+                    val filteredList =
+                        originalList.filter {
+
+                            it.name.lowercase()
+                                .contains(query)
+
+                                    ||
+
+                                    it.applicationNo.lowercase()
+                                        .contains(query)
+                        }
+
+                    adapter.updateList(
+                        filteredList
+                    )
+                }
+
+                override fun afterTextChanged(
+                    s: Editable?
+                ) {}
+            }
+        )
     }
 }

@@ -12,7 +12,7 @@ import com.example.facerecognition.models.Candidate
 import java.io.File
 
 class CandidateAdapter(
-    private val candidateList: List<Candidate>,
+    private var candidateList: MutableList<Candidate>,
     private val onItemClick: (Candidate) -> Unit
 ) : RecyclerView.Adapter<CandidateAdapter.CandidateViewHolder>() {
 
@@ -85,5 +85,16 @@ class CandidateAdapter(
 
     override fun getItemCount(): Int {
         return candidateList.size
+    }
+
+    fun updateList(
+        newList: List<Candidate>
+    ) {
+
+        candidateList.clear()
+
+        candidateList.addAll(newList)
+
+        notifyDataSetChanged()
     }
 }

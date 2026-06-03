@@ -137,4 +137,91 @@ class VerificationLogRepository(
 
         return logList
     }
+    fun clearAllLogs(): Boolean {
+
+        val db =
+            dbHelper.writableDatabase
+
+        val result =
+            db.delete(
+                "VerificationLog",
+                null,
+                null
+            )
+
+        db.close()
+
+        return result >= 0
+    }
+
+    fun getTotalVerifications(): Int {
+
+        val db = dbHelper.readableDatabase
+
+        val cursor =
+            db.rawQuery(
+                "SELECT COUNT(*) FROM VerificationLog",
+                null
+            )
+
+        cursor.moveToFirst()
+
+        val count =
+            cursor.getInt(0)
+
+        cursor.close()
+        db.close()
+
+        return count
+    }
+
+    fun getSuccessfulMatches(): Int {
+
+        val db = dbHelper.readableDatabase
+
+        val cursor =
+            db.rawQuery(
+                """
+            SELECT COUNT(*)
+            FROM VerificationLog
+            WHERE result='MATCHED'
+            """,
+                null
+            )
+
+        cursor.moveToFirst()
+
+        val count =
+            cursor.getInt(0)
+
+        cursor.close()
+        db.close()
+
+        return count
+    }
+
+    fun getFailedMatches(): Int {
+
+        val db = dbHelper.readableDatabase
+
+        val cursor =
+            db.rawQuery(
+                """
+            SELECT COUNT(*)
+            FROM VerificationLog
+            WHERE result='NOT MATCHED'
+            """,
+                null
+            )
+
+        cursor.moveToFirst()
+
+        val count =
+            cursor.getInt(0)
+
+        cursor.close()
+        db.close()
+
+        return count
+    }
 }

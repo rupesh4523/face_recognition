@@ -8,14 +8,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="24dp"
+        android:padding="20dp"
         android:gravity="center_horizontal"
         android:textColor="@color/textPrimary">
 
-        <ImageView
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:src="@android:drawable/ic_menu_myplaces" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -50,6 +46,42 @@
             android:textSize="18sp"
             android:layout_marginTop="12dp"/>
 
+        <TextView
+            android:id="@+id/txtTotalCandidates"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Candidates Registered : 0"
+            android:textColor="@color/textPrimary"
+            android:textSize="18sp"
+            android:layout_marginTop="24dp"/>
+
+        <TextView
+            android:id="@+id/txtTotalVerifications"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Verifications : 0"
+            android:textColor="@color/textPrimary"
+            android:textSize="18sp"
+            android:layout_marginTop="12dp"/>
+
+        <TextView
+            android:id="@+id/txtSuccessfulMatches"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Successful Matches : 0"
+            android:textColor="@color/textPrimary"
+            android:textSize="18sp"
+            android:layout_marginTop="12dp"/>
+
+        <TextView
+            android:id="@+id/txtFailedMatches"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Failed Matches : 0"
+            android:textColor="@color/textPrimary"
+            android:textSize="18sp"
+            android:layout_marginTop="12dp"/>
+
         <Button
             android:id="@+id/btnEditProfile"
             android:layout_width="match_parent"
@@ -64,6 +96,20 @@
             android:layout_height="wrap_content"
             android:text="Verification History"
             android:textColor="@color/textPrimary"
+            android:layout_marginTop="12dp"/>
+
+        <Button
+            android:id="@+id/btnBackupDatabase"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Backup Database"
+            android:layout_marginTop="12dp"/>
+
+        <Button
+            android:id="@+id/btnRestoreDatabase"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Restore Database"
             android:layout_marginTop="12dp"/>
 
         <Button

@@ -68,6 +68,13 @@
         android:textStyle="bold" />
 
     <Button
+        android:id="@+id/btnRetakeVerification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Retake Verification" />
+
+    <Button
         android:id="@+id/btnBackDashboard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

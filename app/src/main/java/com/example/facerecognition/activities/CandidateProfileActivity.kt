@@ -13,9 +13,26 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.facerecognition.R
 import com.example.facerecognition.database.CandidateRepository
 import java.io.File
+import androidx.activity.result.contract.ActivityResultContracts
+import android.graphics.BitmapFactory
+import com.example.facerecognition.ml.FaceRecognitionHelper
 
 class CandidateProfileActivity : AppCompatActivity() {
+    private var newImagePath = ""
 
+    private val updateFaceLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+
+            if (result.resultCode == RESULT_OK) {
+
+                newImagePath =
+                    result.data?.getStringExtra(
+                        "IMAGE_PATH"
+                    ) ?: ""
+            }
+        }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -41,6 +58,11 @@ class CandidateProfileActivity : AppCompatActivity() {
 
         val btnSaveChanges =
             findViewById<Button>(R.id.btnSaveChanges)
+
+        val btnUpdateFace =
+            findViewById<Button>(
+                R.id.btnUpdateFace
+            )
 
         val btnDelete =
             findViewById<Button>(R.id.btnDelete)
@@ -94,9 +116,42 @@ class CandidateProfileActivity : AppCompatActivity() {
             }
 
             btnSaveChanges.setOnClickListener {
+                Toast.makeText(
+                    this,
+                    "New Path: $newImagePath",
+                    Toast.LENGTH_LONG
+                ).show()
+                var updatedEmbedding =
+                    candidate.faceEmbedding
+
+                if (newImagePath.isNotEmpty()) {
+
+                    val bitmap =
+                        BitmapFactory.decodeFile(
+                            newImagePath
+                        )
+
+                    val helper =
+                        FaceRecognitionHelper(this)
+
+                    val embedding =
+                        helper.getEmbedding(bitmap)
+
+                    updatedEmbedding =
+                        embedding.joinToString(",")
+                }
 
                 val updatedCandidate =
                     candidate.copy(
+
+                        imagePath =
+                            if (newImagePath.isNotEmpty())
+                                newImagePath
+                            else
+                                candidate.imagePath,
+
+                        faceEmbedding =
+                            updatedEmbedding,
 
                         name =
                             etName.text.toString(),
@@ -138,6 +193,19 @@ class CandidateProfileActivity : AppCompatActivity() {
 
                     finish()
                 }
+            }
+
+            btnUpdateFace.setOnClickListener {
+
+                val intent =
+                    Intent(
+                        this,
+                        FaceCaptureActivity::class.java
+                    )
+
+                updateFaceLauncher.launch(
+                    intent
+                )
             }
 
             btnDelete.setOnClickListener {
