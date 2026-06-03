@@ -34,6 +34,7 @@ android {
 }
 
 dependencies {
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -46,6 +47,8 @@ dependencies {
     implementation("androidx.camera:camera-view:1.4.2")
 
     implementation("com.google.mlkit:face-detection:16.1.7")
+
+    implementation("com.google.ai.edge.litert:litert:1.0.1")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

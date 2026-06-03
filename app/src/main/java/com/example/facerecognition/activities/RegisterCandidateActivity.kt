@@ -13,6 +13,8 @@ import com.example.facerecognition.R
 import com.example.facerecognition.database.CandidateRepository
 import com.example.facerecognition.models.Candidate
 import java.io.File
+import android.graphics.BitmapFactory
+import com.example.facerecognition.ml.FaceRecognitionHelper
 
 class RegisterCandidateActivity : AppCompatActivity() {
 
@@ -143,6 +145,32 @@ class RegisterCandidateActivity : AppCompatActivity() {
 
                 return@setOnClickListener
             }
+            if (capturedImagePath.isEmpty()) {
+
+                Toast.makeText(
+                    this,
+                    "Capture Face First",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+                return@setOnClickListener
+            }
+
+            val bitmap =
+                BitmapFactory.decodeFile(
+                    capturedImagePath
+                )
+
+            val faceRecognitionHelper =
+                FaceRecognitionHelper(this)
+
+            val embedding =
+                faceRecognitionHelper.getEmbedding(
+                    bitmap
+                )
+
+            val embeddingString =
+                embedding.joinToString(",")
 
             val candidate = Candidate(
                 name = name,
@@ -150,7 +178,7 @@ class RegisterCandidateActivity : AppCompatActivity() {
                 department = department,
                 examName = examName,
                 imagePath = capturedImagePath,
-                faceEmbedding = ""
+                faceEmbedding = embeddingString
             )
 
             val isInserted =
