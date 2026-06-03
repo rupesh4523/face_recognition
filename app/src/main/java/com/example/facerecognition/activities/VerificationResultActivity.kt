@@ -43,11 +43,26 @@ class VerificationResultActivity : AppCompatActivity() {
 
         val txtStatus =
             findViewById<TextView>(R.id.txtStatus)
+        val txtConfidence =
+            findViewById<TextView>(
+                R.id.txtConfidence
+            )
 
         val btnBackDashboard =
             findViewById<Button>(R.id.btnBackDashboard)
 
         if (candidate != null) {
+
+            val matchResult =
+                intent.getBooleanExtra(
+                    "MATCH_RESULT",
+                    false
+                )
+            val confidence =
+                intent.getFloatExtra(
+                    "CONFIDENCE",
+                    0f
+                )
 
             txtCandidateName.text =
                 "Name : ${candidate.name}"
@@ -59,7 +74,13 @@ class VerificationResultActivity : AppCompatActivity() {
                 "Department : ${candidate.department}"
 
             txtStatus.text =
-                "LIVENESS VERIFIED ✓"
+                if (matchResult)
+                    "FACE MATCHED ✓"
+                else
+                    "FACE NOT MATCHED ✗"
+            txtConfidence.text =
+                "Confidence : %.2f%%"
+                    .format(confidence)
 
             if (candidate.imagePath.isNotEmpty()) {
 

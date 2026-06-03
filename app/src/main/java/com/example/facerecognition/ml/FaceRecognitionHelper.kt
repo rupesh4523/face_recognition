@@ -96,6 +96,28 @@ class FaceRecognitionHelper(
 
         return kotlin.math.sqrt(distance)
     }
+    fun getConfidence(
+        embedding1: FloatArray,
+        embedding2: FloatArray
+    ): Float {
+
+        val distance =
+            compareFaces(
+                embedding1,
+                embedding2
+            )
+
+        var confidence =
+            (1f - (distance / 2f)) * 100f
+
+        if (confidence < 0f)
+            confidence = 0f
+
+        if (confidence > 100f)
+            confidence = 100f
+
+        return confidence
+    }
 
     fun isMatch(
         embedding1: FloatArray,

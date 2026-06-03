@@ -59,6 +59,9 @@
         <activity
             android:name=".activities.FaceCaptureActivity"
             android:exported="false"/>
+        <activity
+            android:name=".activities.VerificationFaceCaptureActivity"
+            android:exported="false"/>
     </application>
 
 </manifest>

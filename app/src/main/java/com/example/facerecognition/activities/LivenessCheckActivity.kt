@@ -19,6 +19,10 @@ import com.example.facerecognition.ml.FaceDetectorHelper
 import com.google.mlkit.vision.common.InputImage
 import android.widget.Toast
 import androidx.camera.core.ExperimentalGetImage
+import android.graphics.BitmapFactory
+import androidx.activity.result.contract.ActivityResultContracts
+import com.example.facerecognition.database.CandidateRepository
+import com.example.facerecognition.ml.FaceRecognitionHelper
 
 @ExperimentalGetImage
 class LivenessCheckActivity : AppCompatActivity() {
@@ -33,6 +37,126 @@ class LivenessCheckActivity : AppCompatActivity() {
 
     private var eyesClosedDetected = false
     private var livenessPassed = false
+    private val verificationCaptureLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+
+            if (result.resultCode == RESULT_OK) {
+
+                val verificationImagePath =
+                    result.data?.getStringExtra(
+                        "IMAGE_PATH"
+                    ) ?: ""
+
+                compareFaces(
+                    verificationImagePath
+                )
+            }
+        }
+    private fun compareFaces(
+        verificationImagePath: String
+    ) {
+        if (
+            verificationImagePath.isEmpty()
+        ) {
+
+            Toast.makeText(
+                this,
+                "Verification Image Missing",
+                Toast.LENGTH_SHORT
+            ).show()
+
+            return
+        }
+
+        val repository =
+            CandidateRepository(this)
+
+        val candidate =
+            repository.getCandidateById(
+                candidateId
+            )
+
+        if (candidate == null) {
+
+            Toast.makeText(
+                this,
+                "Candidate Not Found",
+                Toast.LENGTH_SHORT
+            ).show()
+
+            return
+        }
+
+        val registeredBitmap =
+            BitmapFactory.decodeFile(
+                candidate.imagePath
+            )
+
+        val verificationBitmap =
+            BitmapFactory.decodeFile(
+                verificationImagePath
+            )
+
+        val helper =
+            FaceRecognitionHelper(this)
+
+        val embedding1 =
+            helper.getEmbedding(
+                registeredBitmap
+            )
+
+        val embedding2 =
+            helper.getEmbedding(
+                verificationBitmap
+            )
+
+        val matched =
+            helper.isMatch(
+                embedding1,
+                embedding2
+            )
+        val confidence =
+            helper.getConfidence(
+                embedding1,
+                embedding2
+            )
+
+        val intent =
+            Intent(
+                this,
+                VerificationResultActivity::class.java
+            )
+
+        intent.putExtra(
+            "CANDIDATE_ID",
+            candidate.candidateId
+        )
+
+        intent.putExtra(
+            "CANDIDATE_NAME",
+            candidate.name
+        )
+
+        intent.putExtra(
+            "IMAGE_PATH",
+            candidate.imagePath
+        )
+
+        intent.putExtra(
+            "MATCH_RESULT",
+            matched
+        )
+        intent.putExtra(
+            "CONFIDENCE",
+            confidence
+        )
+
+        startActivity(intent)
+
+        finish()
+    }
 
     companion object {
         private const val CAMERA_PERMISSION_CODE = 100
@@ -218,29 +342,14 @@ class LivenessCheckActivity : AppCompatActivity() {
                                 ).show()
 
                                 val intent =
-                                    android.content.Intent(
+                                    Intent(
                                         this,
-                                        VerificationResultActivity::class.java
+                                        VerificationFaceCaptureActivity::class.java
                                     )
 
-                                intent.putExtra(
-                                    "CANDIDATE_ID",
-                                    candidateId
+                                verificationCaptureLauncher.launch(
+                                    intent
                                 )
-
-                                intent.putExtra(
-                                    "CANDIDATE_NAME",
-                                    candidateName
-                                )
-
-                                intent.putExtra(
-                                    "IMAGE_PATH",
-                                    imagePath
-                                )
-
-                                startActivity(intent)
-
-                                finish()
                             }
 
                             else {
