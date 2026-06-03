@@ -10,6 +10,11 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.facerecognition.R
 import com.example.facerecognition.database.CandidateRepository
 import java.io.File
+import com.example.facerecognition.database.VerificationLogRepository
+import com.example.facerecognition.models.VerificationLog
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class VerificationResultActivity : AppCompatActivity() {
 
@@ -63,6 +68,45 @@ class VerificationResultActivity : AppCompatActivity() {
                     "CONFIDENCE",
                     0f
                 )
+            val currentDateTime =
+                SimpleDateFormat(
+                    "dd-MM-yyyy hh:mm a",
+                    Locale.getDefault()
+                ).format(Date())
+
+            val resultText =
+                if (matchResult)
+                    "MATCHED"
+                else
+                    "NOT MATCHED"
+
+            val logRepository =
+                VerificationLogRepository(this)
+
+            val verificationLog =
+                VerificationLog(
+
+                    verificationId = 0,
+
+                    candidateName =
+                        candidate.name,
+
+                    applicationNo =
+                        candidate.applicationNo,
+
+                    dateTime =
+                        currentDateTime,
+
+                    result =
+                        resultText,
+
+                    confidence =
+                        confidence
+                )
+
+            logRepository.insertLog(
+                verificationLog
+            )
 
             txtCandidateName.text =
                 "Name : ${candidate.name}"

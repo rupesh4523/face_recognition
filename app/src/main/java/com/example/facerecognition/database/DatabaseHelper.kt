@@ -14,7 +14,7 @@ class DatabaseHelper(context: Context) :
 
     companion object {
         private const val DATABASE_NAME = "CandidateVerification.db"
-        private const val DATABASE_VERSION = 1
+        private const val DATABASE_VERSION = 2
     }
 
     override fun onCreate(db: SQLiteDatabase) {
@@ -41,13 +41,13 @@ class DatabaseHelper(context: Context) :
 
         val createVerificationTable = """
             CREATE TABLE VerificationLog (
-                verification_id INTEGER PRIMARY KEY AUTOINCREMENT,
-                candidate_id INTEGER,
-                date TEXT,
-                time TEXT,
-                liveness_status TEXT,
-                verification_status TEXT
-            )
+    verification_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    candidate_name TEXT,
+    application_no TEXT,
+    date_time TEXT,
+    result TEXT,
+    confidence REAL
+)
         """.trimIndent()
 
         db.execSQL(createAdminTable)

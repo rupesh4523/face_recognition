@@ -13,15 +13,38 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
-        val editProfile = findViewById<Button>(R.id.btnEditProfile)
-        val logout = findViewById<Button>(R.id.btnLogout)
+        val editProfile =
+            findViewById<Button>(
+                R.id.btnEditProfile
+            )
+
+        val verificationHistory =
+            findViewById<Button>(
+                R.id.btnVerificationHistory
+            )
+
+        val logout =
+            findViewById<Button>(
+                R.id.btnLogout
+            )
 
         editProfile.setOnClickListener {
+
             Toast.makeText(
                 this,
                 "Profile Editing Coming Soon",
                 Toast.LENGTH_SHORT
             ).show()
+        }
+
+        verificationHistory.setOnClickListener {
+
+            startActivity(
+                Intent(
+                    this,
+                    VerificationHistoryActivity::class.java
+                )
+            )
         }
 
         logout.setOnClickListener {

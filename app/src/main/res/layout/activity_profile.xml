@@ -59,6 +59,14 @@
             android:layout_marginTop="30dp"/>
 
         <Button
+            android:id="@+id/btnVerificationHistory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Verification History"
+            android:textColor="@color/textPrimary"
+            android:layout_marginTop="12dp"/>
+
+        <Button
             android:id="@+id/btnLogout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
