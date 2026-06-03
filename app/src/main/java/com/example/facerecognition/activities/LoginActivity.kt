@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.facerecognition.R
 import com.example.facerecognition.database.AdminRepository
+import android.widget.TextView
 
 class LoginActivity : AppCompatActivity() {
 
@@ -18,6 +19,19 @@ class LoginActivity : AppCompatActivity() {
         val etUsername = findViewById<EditText>(R.id.etUsername)
         val etPassword = findViewById<EditText>(R.id.etPassword)
         val btnLogin = findViewById<Button>(R.id.btnLogin)
+        val txtForgotPassword =
+            findViewById<TextView>(
+                R.id.txtForgotPassword
+            )
+        txtForgotPassword.setOnClickListener {
+
+            startActivity(
+                Intent(
+                    this,
+                    ResetPasswordActivity::class.java
+                )
+            )
+        }
 
         val adminRepository = AdminRepository(this)
         etUsername.setOnEditorActionListener { _, _, _ ->

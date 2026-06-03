@@ -61,13 +61,14 @@ class CandidateAdapter(
             candidate.name
 
         holder.txtApplicationNo.text =
-            "Application No: ${candidate.applicationNo}"
+            "Application No • ${candidate.applicationNo}"
 
         holder.txtDepartment.text =
-            "Department: ${candidate.department}"
+            "Department • ${candidate.department}"
 
         holder.txtExamName.text =
-            "Exam: ${candidate.examName}"
+            "Exam • ${candidate.examName}"
+
         holder.itemView.setOnClickListener {
 
             onItemClick(candidate)

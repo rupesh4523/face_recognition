@@ -36,6 +36,8 @@ class VerificationResultActivity : AppCompatActivity() {
 
         val imgCandidate =
             findViewById<ImageView>(R.id.imgCandidate)
+        val imgResult =
+            findViewById<ImageView>(R.id.imgResult)
 
         val txtCandidateName =
             findViewById<TextView>(R.id.txtCandidateName)
@@ -68,6 +70,18 @@ class VerificationResultActivity : AppCompatActivity() {
                     "MATCH_RESULT",
                     false
                 )
+            if (matchResult) {
+
+                imgResult.setImageResource(
+                    android.R.drawable.checkbox_on_background
+                )
+
+            } else {
+
+                imgResult.setImageResource(
+                    android.R.drawable.ic_delete
+                )
+            }
             if (matchResult) {
 
                 btnRetakeVerification.visibility =
@@ -149,6 +163,33 @@ class VerificationResultActivity : AppCompatActivity() {
                     )
                 )
             }
+            btnRetakeVerification.setOnClickListener {
+
+                val intent =
+                    Intent(
+                        this,
+                        LivenessCheckActivity::class.java
+                    )
+
+                intent.putExtra(
+                    "CANDIDATE_ID",
+                    candidate.candidateId
+                )
+
+                intent.putExtra(
+                    "CANDIDATE_NAME",
+                    candidate.name
+                )
+
+                intent.putExtra(
+                    "IMAGE_PATH",
+                    candidate.imagePath
+                )
+
+                startActivity(intent)
+
+                finish()
+            }
         }
 
         btnBackDashboard.setOnClickListener {
@@ -166,22 +207,7 @@ class VerificationResultActivity : AppCompatActivity() {
 
             finish()
         }
-        btnRetakeVerification.setOnClickListener {
 
-            val intent =
-                Intent(
-                    this,
-                    LivenessCheckActivity::class.java
-                )
 
-            intent.putExtra(
-                "CANDIDATE_ID",
-                candidateId
-            )
-
-            startActivity(intent)
-
-            finish()
-        }
     }
 }

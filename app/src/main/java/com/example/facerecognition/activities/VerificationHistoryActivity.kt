@@ -14,6 +14,7 @@ import androidx.appcompat.app.AlertDialog
 import java.io.File
 import java.io.FileWriter
 import android.os.Environment
+import android.widget.TextView
 
 class VerificationHistoryActivity :
     AppCompatActivity() {
@@ -52,6 +53,14 @@ class VerificationHistoryActivity :
 
         val logs =
             repository.getAllLogs()
+
+        val txtHistoryCount =
+            findViewById<TextView>(
+                R.id.txtHistoryCount
+            )
+
+        txtHistoryCount.text =
+            "Total Records : ${logs.size}"
 
         recyclerLogs.layoutManager =
             LinearLayoutManager(this)
@@ -139,13 +148,6 @@ class VerificationHistoryActivity :
         }
 
         btnBack.setOnClickListener {
-
-            startActivity(
-                Intent(
-                    this,
-                    CandidateVerificationActivity::class.java
-                )
-            )
 
             finish()
         }

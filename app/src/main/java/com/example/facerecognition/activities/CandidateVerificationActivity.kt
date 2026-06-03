@@ -2,8 +2,8 @@ package com.example.facerecognition.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -14,132 +14,152 @@ class CandidateVerificationActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_candidate_verification)
 
-        findViewById<Button>(R.id.btnRegister)
-            .setOnClickListener {
+        setContentView(
+            R.layout.activity_candidate_verification
+        )
 
-                startActivity(
-                    Intent(
-                        this,
-                        RegisterCandidateActivity::class.java
-                    )
+        findViewById<android.widget.Button>(
+            R.id.btnRegister
+        ).setOnClickListener {
+
+            startActivity(
+                Intent(
+                    this,
+                    RegisterCandidateActivity::class.java
                 )
-            }
+            )
+        }
 
-        findViewById<Button>(R.id.btnCandidateList)
-            .setOnClickListener {
+        findViewById<android.widget.Button>(
+            R.id.btnCandidateList
+        ).setOnClickListener {
 
-                startActivity(
-                    Intent(
-                        this,
-                        CandidateListActivity::class.java
-                    )
+            startActivity(
+                Intent(
+                    this,
+                    CandidateListActivity::class.java
                 )
-            }
+            )
+        }
 
-        findViewById<Button>(R.id.btnProfile)
-            .setOnClickListener {
+        findViewById<ImageButton>(
+            R.id.btnProfile
+        ).setOnClickListener {
 
-                startActivity(
-                    Intent(
-                        this,
-                        ProfileActivity::class.java
-                    )
+            startActivity(
+                Intent(
+                    this,
+                    ProfileActivity::class.java
                 )
-            }
+            )
+        }
 
-        findViewById<Button>(R.id.btnVerify)
-            .setOnClickListener {
+        findViewById<android.widget.Button>(
+            R.id.btnVerify
+        ).setOnClickListener {
 
-                val editText = EditText(this)
+            val editText =
+                EditText(this)
 
-                AlertDialog.Builder(this)
-                    .setTitle("Verify Candidate")
-                    .setMessage("Enter Application Number")
-                    .setView(editText)
+            AlertDialog.Builder(this)
+                .setTitle(
+                    "Verify Candidate"
+                )
+                .setMessage(
+                    "Enter Application Number"
+                )
+                .setView(editText)
 
-                    .setPositiveButton("Search") { _, _ ->
+                .setPositiveButton(
+                    "Search"
+                ) { _, _ ->
 
-                        val applicationNo =
-                            editText.text.toString().trim()
+                    val applicationNo =
+                        editText.text
+                            .toString()
+                            .trim()
 
-                        val repository =
-                            CandidateRepository(this)
+                    val repository =
+                        CandidateRepository(
+                            this
+                        )
 
-                        val candidate =
-                            repository.getCandidateByApplicationNo(
-                                applicationNo
-                            )
+                    val candidate =
+                        repository.getCandidateByApplicationNo(
+                            applicationNo
+                        )
 
-                        if (candidate != null) {
+                    if (candidate != null) {
 
-                            Toast.makeText(
+                        Toast.makeText(
+                            this,
+                            "Candidate Found",
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                        val intent =
+                            Intent(
                                 this,
-                                "Candidate Found",
-                                Toast.LENGTH_SHORT
-                            ).show()
-
-                            val intent =
-                                Intent(
-                                    this,
-                                    LivenessCheckActivity::class.java
-                                )
-
-                            intent.putExtra(
-                                "CANDIDATE_ID",
-                                candidate.candidateId
+                                LivenessCheckActivity::class.java
                             )
 
-                            intent.putExtra(
-                                "CANDIDATE_NAME",
-                                candidate.name
+                        intent.putExtra(
+                            "CANDIDATE_ID",
+                            candidate.candidateId
+                        )
+
+                        intent.putExtra(
+                            "CANDIDATE_NAME",
+                            candidate.name
+                        )
+
+                        intent.putExtra(
+                            "IMAGE_PATH",
+                            candidate.imagePath
+                        )
+
+                        startActivity(
+                            intent
+                        )
+
+                    } else {
+
+                        AlertDialog.Builder(this)
+                            .setTitle(
+                                "Candidate Not Found"
+                            )
+                            .setMessage(
+                                "Candidate is not registered. Register now?"
                             )
 
-                            intent.putExtra(
-                                "IMAGE_PATH",
-                                candidate.imagePath
-                            )
+                            .setPositiveButton(
+                                "Register"
+                            ) { _, _ ->
 
-                            startActivity(intent)
-
-                        } else {
-
-                            AlertDialog.Builder(this)
-                                .setTitle(
-                                    "Candidate Not Found"
-                                )
-                                .setMessage(
-                                    "Candidate is not registered. Register now?"
-                                )
-
-                                .setPositiveButton(
-                                    "Register"
-                                ) { _, _ ->
-
-                                    startActivity(
-                                        Intent(
-                                            this,
-                                            RegisterCandidateActivity::class.java
-                                        )
+                                startActivity(
+                                    Intent(
+                                        this,
+                                        RegisterCandidateActivity::class.java
                                     )
-                                }
-
-                                .setNegativeButton(
-                                    "Cancel",
-                                    null
                                 )
+                            }
 
-                                .show()
-                        }
+                            .setNegativeButton(
+                                "Cancel",
+                                null
+                            )
+
+                            .show()
                     }
+                }
 
-                    .setNegativeButton(
-                        "Cancel",
-                        null
-                    )
+                .setNegativeButton(
+                    "Cancel",
+                    null
+                )
 
-                    .show()
-            }
+                .show()
+        }
     }
 }

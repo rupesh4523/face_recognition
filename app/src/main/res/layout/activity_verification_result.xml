@@ -1,84 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="24dp"
     android:background="@color/backgroundColor">
 
-    <TextView
-        android:id="@+id/txtResultTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Verification Result"
-        android:textColor="@color/textPrimary"
-        android:textSize="28sp"
-        android:textStyle="bold" />
-
-    <ImageView
-        android:id="@+id/imgCandidate"
-        android:layout_width="180dp"
-        android:layout_height="180dp"
-        android:layout_marginTop="30dp"
-        android:scaleType="centerCrop" />
-
-    <TextView
-        android:id="@+id/txtCandidateName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text=""
-        android:textColor="@color/textPrimary"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/txtApplicationNo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textColor="@color/textPrimary"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/txtDepartment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textColor="@color/textPrimary"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/txtStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text=""
-        android:textColor="@color/textPrimary"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-    <TextView
-        android:id="@+id/txtConfidence"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text=""
-        android:textColor="@color/textPrimary"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <Button
-        android:id="@+id/btnRetakeVerification"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="Retake Verification" />
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="24dp">
 
-    <Button
-        android:id="@+id/btnBackDashboard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Back To Dashboard" />
+        <!-- Success Icon -->
 
-</LinearLayout>
+        <ImageView
+            android:id="@+id/imgResult"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@android:drawable/checkbox_on_background"
+            android:layout_marginTop="20dp"/>
+
+        <!-- Title -->
+
+        <TextView
+            android:id="@+id/txtResultTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Verification Result"
+            android:textColor="@color/textPrimary"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"/>
+
+        <!-- Candidate Image -->
+
+        <ImageView
+            android:id="@+id/imgCandidate"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_marginTop="25dp"
+            android:background="#DDDDDD"
+            android:scaleType="centerCrop"/>
+
+        <!-- Candidate Details Card -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_background"
+            android:padding="20dp"
+            android:layout_marginTop="25dp">
+
+            <TextView
+                android:id="@+id/txtCandidateName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textPrimary"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/txtApplicationNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textPrimary"
+                android:textSize="16sp"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:id="@+id/txtDepartment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textPrimary"
+                android:textSize="16sp"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:id="@+id/txtStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textPrimary"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:id="@+id/txtConfidence"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textPrimary"
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"/>
+
+        </LinearLayout>
+
+        <!-- Button -->
+
+        <Button
+            android:id="@+id/btnRetakeVerification"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="🔄 Retake Verification"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginTop="25dp"/>
+
+        <Button
+            android:id="@+id/btnBackDashboard"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="🏠 Back To Dashboard"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginTop="25dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AttendX v1.0"
+            android:textColor="@color/textSecondary"
+            android:textSize="12sp"
+            android:layout_marginTop="20dp"/>
+
+    </LinearLayout>
+
+</ScrollView>

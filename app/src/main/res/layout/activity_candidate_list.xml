@@ -11,20 +11,39 @@
         android:orientation="vertical"
         android:padding="40dp">
 
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:src="@drawable/profile_icon" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Registered Candidates"
             android:textColor="@color/textPrimary"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/txtCandidateCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Candidates : 0"
+            android:textColor="@color/textSecondary"
+            android:textSize="16sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"/>
 
         <EditText
             android:id="@+id/etSearch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Search by Name or Application No"
-            android:layout_margin="10dp"/>
+            android:layout_width="wrap_content"
+            android:layout_height="62dp"
+            android:layout_marginTop="25dp"
+            android:hint="🔍 Search by Name or Application No"
+            android:padding="14dp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerCandidates"

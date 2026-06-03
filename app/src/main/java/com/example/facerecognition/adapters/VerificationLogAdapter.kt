@@ -74,14 +74,17 @@ class VerificationLogAdapter(
             "Application No : ${log.applicationNo}"
 
         holder.txtResult.text =
-            "Result : ${log.result}"
+            if (log.result == "MATCHED")
+                "✅ MATCHED"
+            else
+                "❌ NOT MATCHED"
 
         holder.txtConfidence.text =
             "Confidence : %.2f%%"
                 .format(log.confidence)
 
         holder.txtDateTime.text =
-            log.dateTime
+            "Verified On : ${log.dateTime}"
     }
 
     override fun getItemCount(): Int {

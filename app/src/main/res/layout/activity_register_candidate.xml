@@ -1,85 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/surfaceColor">
+    android:background="@color/backgroundColor">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:padding="24dp"
+        android:gravity="center_horizontal">
+
+
+        <!-- Title -->
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Register Candidate"
             android:textColor="@color/textPrimary"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"/>
 
-        <EditText
-            android:id="@+id/etName"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter candidate details and capture face"
+            android:textColor="@color/textSecondary"
+            android:textSize="14sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="25dp"/>
+
+        <!-- Card -->
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Candidate Name"
-            android:layout_marginTop="20dp"
-            android:inputType="text"
-            android:singleLine="true"
-            android:imeOptions="actionNext"/>
+            android:orientation="vertical"
+            android:background="@drawable/card_background"
+            android:padding="20dp">
 
-        <EditText
-            android:id="@+id/etApplicationNo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Application Number"
-            android:layout_marginTop="12dp"
-            android:inputType="text"
-            android:singleLine="true"
-            android:imeOptions="actionNext"/>
+            <EditText
+                android:id="@+id/etName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Candidate Name"
+                android:singleLine="true"
+                android:inputType="text"/>
 
-        <EditText
-            android:id="@+id/etDepartment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Department"
-            android:layout_marginTop="12dp"
-            android:inputType="text"
-            android:singleLine="true"
-            android:imeOptions="actionNext"/>
+            <EditText
+                android:id="@+id/etApplicationNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Application Number"
+                android:layout_marginTop="15dp"
+                android:singleLine="true"/>
 
-        <EditText
-            android:id="@+id/etExamName"
-            android:layout_width="match_parent"
+            <EditText
+                android:id="@+id/etDepartment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Department"
+                android:layout_marginTop="15dp"
+                android:singleLine="true"/>
+
+            <EditText
+                android:id="@+id/etExamName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Exam Name"
+                android:layout_marginTop="15dp"
+                android:singleLine="true"/>
+
+        </LinearLayout>
+
+        <!-- Face Preview -->
+
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Exam Name"
-            android:layout_marginTop="12dp"
-            android:inputType="text"
-            android:singleLine="true"
-            android:imeOptions="actionDone"/>
+            android:text="Captured Face"
+            android:textColor="@color/textPrimary"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginTop="25dp"/>
 
         <ImageView
             android:id="@+id/imgCandidateFace"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:layout_marginTop="15dp"
             android:background="#DDDDDD"
             android:scaleType="centerCrop"/>
+
+        <!-- Buttons -->
 
         <Button
             android:id="@+id/btnCaptureFace"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Capture Face"
-            android:layout_marginTop="24dp"/>
+            android:layout_height="60dp"
+            android:text="📷 Capture Face"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginTop="25dp"/>
 
         <Button
             android:id="@+id/btnSaveCandidate"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Save Candidate"
+            android:layout_height="60dp"
+            android:text="✓ Save Candidate"
+            android:textStyle="bold"
+            android:textSize="16sp"
             android:layout_marginTop="12dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AttendX v1.0"
+            android:textColor="@color/textSecondary"
+            android:textSize="12sp"
+            android:layout_marginTop="20dp"/>
 
     </LinearLayout>
 

@@ -5,33 +5,59 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:layout_marginBottom="12dp"
+    android:background="@drawable/card_background">
+
+    <!-- Candidate Name -->
 
     <TextView
         android:id="@+id/txtCandidateName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="20sp"
         android:textStyle="bold"
-        android:textSize="18sp"/>
+        android:textColor="@color/textPrimary"/>
+
+    <!-- Application Number -->
 
     <TextView
         android:id="@+id/txtApplicationNo"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:textColor="@color/textSecondary"
+        android:textSize="15sp"
+        android:layout_marginTop="6dp"/>
+
+    <!-- Result -->
 
     <TextView
         android:id="@+id/txtResult"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/textPrimary"
+        android:layout_marginTop="10dp"/>
+
+    <!-- Confidence -->
 
     <TextView
         android:id="@+id/txtConfidence"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textColor="@color/textPrimary"
+        android:layout_marginTop="6dp"/>
+
+    <!-- Date Time -->
 
     <TextView
         android:id="@+id/txtDateTime"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="@color/textSecondary"
+        android:layout_marginTop="10dp"/>
 
 </LinearLayout>

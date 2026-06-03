@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.facerecognition.R
 import com.example.facerecognition.adapters.CandidateAdapter
 import com.example.facerecognition.database.CandidateRepository
+import android.widget.TextView
 
 class CandidateListActivity : AppCompatActivity() {
 
@@ -34,6 +35,13 @@ class CandidateListActivity : AppCompatActivity() {
 
         val candidateList =
             repository.getAllCandidates()
+        val txtCandidateCount =
+            findViewById<TextView>(
+                R.id.txtCandidateCount
+            )
+
+        txtCandidateCount.text =
+            "Total Candidates : ${candidateList.size}"
 
         val originalList =
             candidateList.toMutableList()

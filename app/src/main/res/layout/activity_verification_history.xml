@@ -1,43 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20dp"
+    android:padding="24dp"
     android:background="@color/backgroundColor">
+
+    <!-- Header Icon -->
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:src="@drawable/profile_icon" />
+
+    <!-- Title -->
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Verification History"
-        android:textSize="24sp"
+        android:textColor="@color/textPrimary"
+        android:textSize="30sp"
         android:textStyle="bold"
-        android:textColor="@color/textPrimary"/>
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"/>
+
+    <!-- Total Records -->
+
+    <TextView
+        android:id="@+id/txtHistoryCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Records : 0"
+        android:textColor="@color/textSecondary"
+        android:textSize="16sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="20dp"/>
+
+    <!-- Logs List -->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerLogs"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginTop="20dp"/>
+        android:layout_weight="1"/>
+
+    <!-- Buttons -->
+
     <Button
         android:id="@+id/btnExportLogs"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Export Logs"/>
+        android:layout_height="60dp"
+        android:text="📄 Export Logs"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_marginTop="15dp"/>
 
     <Button
         android:id="@+id/btnClearHistory"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Clear All History" />
+        android:layout_height="60dp"
+        android:text="🗑️ Clear History"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_marginTop="12dp"/>
 
     <Button
         android:id="@+id/btnBack"
         android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="← Back To Profile"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_marginTop="12dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Back"/>
+        android:text="AttendX v1.0"
+        android:textColor="@color/textSecondary"
+        android:textSize="12sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"/>
 
 </LinearLayout>

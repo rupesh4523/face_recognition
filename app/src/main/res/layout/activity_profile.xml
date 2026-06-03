@@ -8,117 +8,147 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp"
-        android:gravity="center_horizontal"
-        android:textColor="@color/textPrimary">
+        android:padding="40dp"
+        android:gravity="center_horizontal">
 
+        <!-- Profile Image -->
+
+        <ImageView
+            android:id="@+id/imgProfile"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:src="@drawable/profile"
+            android:scaleType="fitCenter"/>
+
+        <!-- Title -->
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Admin Profile"
-            android:textColor="@color/textPrimary"
-            android:textSize="28sp"
+            android:textSize="30sp"
             android:textStyle="bold"
-            android:layout_marginTop="16dp"/>
+            android:textColor="@color/textPrimary"
+            android:layout_marginTop="15dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Username : Admin"
+            android:text="Examination Officer"
+            android:textSize="16sp"
             android:textColor="@color/textPrimary"
-            android:textSize="18sp"
-            android:layout_marginTop="24dp"/>
+            android:layout_marginTop="5dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Role : Examination Officer"
-            android:textColor="@color/textPrimary"
-            android:textSize="18sp"
-            android:layout_marginTop="12dp"/>
+        <!-- Statistics Section -->
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Version : 1.0"
-            android:textColor="@color/textPrimary"
-            android:textSize="18sp"
-            android:layout_marginTop="12dp"/>
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:layout_marginTop="25dp"
+            android:background="#1AFFFFFF">
 
-        <TextView
-            android:id="@+id/txtTotalCandidates"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Candidates Registered : 0"
-            android:textColor="@color/textPrimary"
-            android:textSize="18sp"
-            android:layout_marginTop="24dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dashboard Statistics"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/textPrimary"/>
 
-        <TextView
-            android:id="@+id/txtTotalVerifications"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Total Verifications : 0"
-            android:textColor="@color/textPrimary"
-            android:textSize="18sp"
-            android:layout_marginTop="12dp"/>
+            <TextView
+                android:id="@+id/txtTotalCandidates"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Candidates Registered : 0"
+                android:textSize="18sp"
+                android:textColor="@color/textPrimary"
+                android:layout_marginTop="15dp"/>
 
-        <TextView
-            android:id="@+id/txtSuccessfulMatches"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Successful Matches : 0"
-            android:textColor="@color/textPrimary"
-            android:textSize="18sp"
-            android:layout_marginTop="12dp"/>
+            <TextView
+                android:id="@+id/txtTotalVerifications"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Verifications : 0"
+                android:textSize="18sp"
+                android:textColor="@color/textPrimary"
+                android:layout_marginTop="10dp"/>
 
-        <TextView
-            android:id="@+id/txtFailedMatches"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Failed Matches : 0"
-            android:textColor="@color/textPrimary"
-            android:textSize="18sp"
-            android:layout_marginTop="12dp"/>
+            <TextView
+                android:id="@+id/txtSuccessfulMatches"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Successful Matches : 0"
+                android:textSize="18sp"
+                android:textColor="@color/textPrimary"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:id="@+id/txtFailedMatches"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Failed Matches : 0"
+                android:textSize="18sp"
+                android:textColor="@color/textPrimary"
+                android:layout_marginTop="10dp"/>
+
+        </LinearLayout>
+
+        <!-- Actions -->
 
         <Button
             android:id="@+id/btnEditProfile"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Edit Profile"
-            android:textColor="@color/textPrimary"
-            android:layout_marginTop="30dp"/>
+            android:layout_height="60dp"
+            android:text="✏️ Edit Profile"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginTop="15dp"/>
 
         <Button
             android:id="@+id/btnVerificationHistory"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Verification History"
-            android:textColor="@color/textPrimary"
-            android:layout_marginTop="12dp"/>
+            android:layout_height="60dp"
+            android:text="📋 Verification History"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginTop="15dp"/>
 
         <Button
             android:id="@+id/btnBackupDatabase"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Backup Database"
-            android:layout_marginTop="12dp"/>
+            android:layout_height="60dp"
+            android:text="💾 Backup Database"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginTop="15dp"/>
 
         <Button
             android:id="@+id/btnRestoreDatabase"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Restore Database"
-            android:layout_marginTop="12dp"/>
+            android:layout_height="60dp"
+            android:text="📂 Restore Database"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginTop="15dp"/>
 
         <Button
             android:id="@+id/btnLogout"
             android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="🚪 Logout"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Logout"
+            android:text="AttendX v1.0"
             android:textColor="@color/textPrimary"
-            android:layout_marginTop="12dp"/>
+            android:textSize="12sp"
+            android:layout_marginTop="20dp"/>
 
     </LinearLayout>
 
