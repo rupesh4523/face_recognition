@@ -1,61 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp"
     android:background="@color/backgroundColor">
 
-    <TextView
-        android:id="@+id/txtTitle"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Admin Login"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        android:textColor="@color/textPrimary"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="80dp"/>
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center_horizontal">
 
-    <EditText
-        android:id="@+id/etUsername"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Username"
-        android:textColor="@color/textPrimary"
-        android:textColorHint="@color/textSecondary"
-        android:inputType="text"
-        android:imeOptions="actionNext"
-        app:layout_constraintTop_toBottomOf="@id/txtTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="40dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FaceVerify"
+            android:textColor="@color/primaryColor"
+            android:textSize="34sp"
+            android:textStyle="bold"
+            android:layout_marginTop="80dp"/>
 
-    <EditText
-        android:id="@+id/etPassword"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:imeOptions="actionDone"
-        android:textColor="@color/textPrimary"
-        android:textColorHint="@color/textSecondary"
-        app:layout_constraintTop_toBottomOf="@id/etUsername"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Smart Candidate Verification"
+            android:textColor="@color/textSecondary"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"/>
 
-    <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="LOGIN"
-        app:layout_constraintTop_toBottomOf="@id/etPassword"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_background"
+            android:padding="20dp"
+            android:layout_marginTop="40dp"
+            android:elevation="4dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <EditText
+                android:id="@+id/etUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Username"
+                android:textColor="@color/textPrimary"
+                android:textColorHint="@color/textSecondary"
+                android:backgroundTint="@color/primaryColor"
+                android:singleLine="true"
+                android:imeOptions="actionNext"/>
+
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:textColor="@color/textPrimary"
+                android:textColorHint="@color/textSecondary"
+                android:backgroundTint="@color/primaryColor"
+                android:layout_marginTop="16dp"
+                android:singleLine="true"
+                android:imeOptions="actionDone"/>
+
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="LOGIN"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:background="@drawable/button_primary"
+                android:layout_marginTop="24dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
