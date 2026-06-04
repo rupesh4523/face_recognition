@@ -1,10 +1,10 @@
-# Examination Candidate Verification System
+# AttendX - Examination Candidate Verification System
 
 ## Overview
 
-The Examination Candidate Verification System is an Android-based offline identity verification solution designed for examination environments. The application uses facial verification, liveness detection, and local database storage to authenticate candidates before examinations.
+AttendX is an Android-based offline candidate verification and attendance system developed using Kotlin, SQLite, CameraX, Google ML Kit, and Face Recognition techniques.
 
-The project is being developed as a hackathon solution and is designed to function completely offline without requiring internet connectivity.
+The application is designed for examination environments where candidates must be verified before entering examination halls. The system performs facial verification, liveness detection, candidate management, verification logging, and database management without requiring an internet connection.
 
 ---
 
@@ -12,16 +12,20 @@ The project is being developed as a hackathon solution and is designed to functi
 
 ### Completion Status
 
-Approximately 70% Complete
+Approximately 95% Complete
 
 ### Current Build Status
 
 * Application builds successfully
-* SQLite integration completed
-* Camera integration completed
-* Face detection working
-* Blink-based liveness detection working
-* Light/Dark mode support implemented
+* Face Registration completed
+* Face Verification completed
+* Blink-based Liveness Detection completed
+* Candidate Management completed
+* Verification History completed
+* CSV Export completed
+* Database Backup & Restore completed
+* Password Recovery completed
+* Modern UI implementation completed
 
 ---
 
@@ -29,48 +33,68 @@ Approximately 70% Complete
 
 ### Admin Authentication
 
-* Admin Login Screen
-* Username and Password Validation
-* SQLite-based Authentication
+* Admin Login
+* Username & Password Validation
+* Edit Profile
+* Change Username & Password
+* Password Recovery using Device Authentication
 
 ### Candidate Management
 
-* Candidate Registration Screen
-* Candidate List Screen
-* Candidate Information Storage
-* SQLite Database Integration
+* Candidate Registration
+* Candidate Profile Management
+* Candidate Search
+* Candidate List
+* Edit Candidate Information
+* Delete Candidate
+* Face Update Support
 
-### Face Verification Components
+### Face Verification System
 
 * CameraX Integration
-* Front Camera Preview
-* Real-Time Face Detection using Google ML Kit
+* Real-Time Face Detection
 * Blink-Based Liveness Detection
-* Candidate Verification Workflow
+* Face Embedding Comparison
+* Candidate Verification
+* Confidence Score Calculation
+* Verification Result Display
+
+### Verification History
+
+* Verification Logs
+* Date & Time Recording
+* Match / No Match Status
+* CSV Export
+* Clear Verification History
+
+### Database Management
+
+* SQLite Offline Storage
+* Database Backup
+* Database Restore
+* Candidate Repository
+* Verification Repository
+* Admin Repository
 
 ### User Interface
 
 * Splash Screen
 * Login Screen
-* Candidate Verification Dashboard
-* Register Candidate Screen
-* Candidate List Screen
-* Face Capture Screen
-* Liveness Detection Screen
-* Verification Result Screen
+* Dashboard
+* Candidate Registration
+* Candidate List
+* Candidate Profile
+* Verification Result
+* Verification History
+* Admin Profile
+* Edit Profile
+* Password Recovery
 
 ### Theme Support
 
 * Light Mode
 * Dark Mode
-* Automatic Theme Switching Based on Device Settings
-
-### Database
-
-* SQLite Offline Storage
-* Candidate Repository
-* Admin Repository
-* Verification Repository
+* Automatic Theme Switching
 
 ---
 
@@ -89,6 +113,7 @@ Approximately 70% Complete
 ### Machine Learning
 
 * Google ML Kit Face Detection
+* Face Embedding Comparison
 
 ### Camera Framework
 
@@ -111,26 +136,29 @@ com.example.facerecognition
 │   ├── CandidateVerificationActivity
 │   ├── RegisterCandidateActivity
 │   ├── CandidateListActivity
+│   ├── CandidateProfileActivity
 │   ├── FaceCaptureActivity
 │   ├── LivenessCheckActivity
 │   ├── VerificationResultActivity
-│   └── ProfileActivity
+│   ├── VerificationHistoryActivity
+│   ├── ProfileActivity
+│   ├── EditProfileActivity
+│   └── ResetPasswordActivity
 │
 ├── database
 │   ├── DatabaseHelper.kt
 │   ├── CandidateRepository.kt
 │   ├── AdminRepository.kt
-│   └── VerificationRepository.kt
+│   └── VerificationLogRepository.kt
 │
 ├── models
 │   ├── Candidate.kt
-│   ├── Admin.kt
 │   └── VerificationLog.kt
 │
-├── ml
-│   └── FaceDetectorHelper.kt
-│
 ├── adapters
+│   ├── CandidateAdapter.kt
+│   └── VerificationLogAdapter.kt
+│
 └── utils
 ```
 
@@ -152,6 +180,8 @@ Candidate Verification
 Face Detection
       ↓
 Blink-Based Liveness Detection
+      ↓
+Face Matching
       ↓
 Verification Result
 ```
@@ -176,34 +206,41 @@ Liveness Passed
 
 ---
 
-## Features Under Development
+## Face Verification Workflow
 
-### Face Registration
+```text
+Registered Candidate
+        ↓
+Stored Face Embedding
+        ↓
+Capture Live Face
+        ↓
+Generate Embedding
+        ↓
+Compare Embeddings
+        ↓
+Calculate Confidence Score
+        ↓
+Match / No Match
+```
 
-* Capture Candidate Face
-* Save Face Image Locally
-* Store Image Path in SQLite
-* Face Preview in Registration Screen
+---
 
-### Face Recognition
+## Verification History Workflow
 
-* FaceNet Integration
-* Face Embedding Generation
-* Embedding Storage in SQLite
-* Face Matching System
-* Similarity Score Calculation
-
-### Verification System
-
-* Candidate Face Comparison
-* Match / No Match Decision
-* Confidence Score
-
-### Verification Logs
-
-* Verification History
-* Timestamp Recording
-* Candidate Activity Logs
+```text
+Verification Completed
+         ↓
+Save Log
+         ↓
+Store Result
+         ↓
+Store Confidence
+         ↓
+Store Timestamp
+         ↓
+Verification History
+```
 
 ---
 
@@ -215,30 +252,39 @@ The application is designed to work completely offline.
 
 * SQLite Database
 * Candidate Information
+* Face Embeddings
 * Verification Logs
-* Face Metadata
+* Admin Credentials
 
 ### Offline Processing
 
 * Face Detection
 * Liveness Detection
+* Face Matching
 * Candidate Verification
-* Data Management
+* Database Management
 
 No internet connection is required during operation.
 
 ---
 
-## Future Enhancements
+## Additional Features
 
-* Face Recognition using FaceNet
-* Face Embedding Storage
-* Head Turn Detection
-* Advanced Anti-Spoofing
-* Confidence Score Analysis
-* Verification Reports
-* Examination Attendance Tracking
-* Analytics Dashboard
+### CSV Export
+
+Exports:
+
+* Candidate Name
+* Application Number
+* Verification Result
+* Confidence Score
+* Date & Time
+
+### Database Backup
+
+* Backup SQLite Database
+* Restore Database
+* Offline Data Recovery
 
 ---
 
@@ -254,9 +300,9 @@ git clone <repository-url>
 
 3. Sync Gradle
 
-4. Connect an Android device or emulator
+4. Connect Android Device
 
-5. Run the application
+5. Run Application
 
 ---
 
@@ -268,32 +314,22 @@ git clone <repository-url>
 
 ---
 
-## Team Responsibilities
+## Future Enhancements
 
-### Frontend Team
-
-* UI Development
-* Navigation
-* User Experience
-
-### Database Team
-
-* SQLite Management
-* Data Persistence
-* Verification Logs
-
-### AI Team
-
-* Face Detection
-* Liveness Detection
-* Face Recognition
-* Candidate Verification
+* FaceNet Integration
+* Advanced Anti-Spoofing
+* Head Movement Detection
+* Department Wise Analytics
+* Attendance Reports
+* PDF Report Generation
+* Multi-Admin Support
+* Cloud Synchronization
 
 ---
 
 ## Project Objective
 
-To build a secure, offline, AI-powered candidate verification system that prevents impersonation during examinations through facial verification and liveness detection.
+To build a secure offline AI-powered candidate verification system that prevents impersonation during examinations using facial verification and liveness detection.
 
 ---
 
@@ -305,3 +341,8 @@ To build a secure, offline, AI-powered candidate verification system that preven
 * CameraX
 * Google ML Kit
 * Material Design 3
+---
+
+## Version
+
+AttendX v1.0
