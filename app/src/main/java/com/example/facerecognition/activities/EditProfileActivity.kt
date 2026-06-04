@@ -35,6 +35,15 @@ class EditProfileActivity :
                 R.id.btnSave
             )
 
+        val btnCancel =
+            findViewById<Button>(
+                R.id.btnCancel
+            )
+        btnCancel.setOnClickListener {
+
+            finish()
+        }
+
         val repository =
             AdminRepository(this)
 
